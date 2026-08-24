@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.json",
+  "include": ["**/*.ts", "../src/i18n/**/*", "../src/site.config.ts"],
+  "exclude": [],
+  "compilerOptions": {
+    "types": ["@cloudflare/workers-types"],
+    "lib": ["ESNext"],
+    "noEmit": true
+  }
+}
