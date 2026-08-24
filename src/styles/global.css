@@ -1,0 +1,95 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+
+/*
+  Jetons de theme du site. Toute couleur, tout rayon et toute ombre passent par
+  ici : aucune valeur arbitraire ne doit etre repetee dans le markup.
+*/
+@theme {
+  /* Surfaces et texte */
+  --color-canvas: #f8faf9;
+  --color-surface: #ffffff;
+  --color-line: #e5e7eb;
+  --color-ink: #111827;
+  --color-muted: #6b7280;
+  --color-subtle: #f3f4f6;
+
+  /* Accent vert : usage rare, voir la regle du budget vert dans le README */
+  --color-accent: #16a34a;
+  --color-accent-strong: #15803d;
+  --color-accent-soft: #dcfce7;
+
+  /* Rayons */
+  --radius-card: 16px;
+  --radius-control: 10px;
+  --radius-chip: 8px;
+
+  /* Ombres, tres discretes */
+  --shadow-card: 0 1px 3px rgb(17 24 39 / 0.06);
+  --shadow-card-hover: 0 2px 6px rgb(17 24 39 / 0.08);
+  --shadow-focus: 0 0 0 3px rgb(22 163 74 / 0.15);
+
+  /* Typographie */
+  --font-sans: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, -apple-system,
+    'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Indicateur de focus unique pour tout le site : c'est la seule zone verte
+     transitoire, elle ne s'affiche que sur un element a la fois. */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-chip);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Champs de formulaire : bordure grise au repos, vert + halo au focus. */
+  .field {
+    width: 100%;
+    border-radius: var(--radius-control);
+    border: 1px solid var(--color-line);
+    background-color: var(--color-surface);
+    padding: 0.625rem 0.75rem;
+    font-size: 0.9375rem;
+    color: var(--color-ink);
+    transition:
+      border-color 150ms ease,
+      box-shadow 150ms ease;
+  }
+
+  .field::placeholder {
+    color: var(--color-muted);
+  }
+
+  .field:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-focus);
+  }
+}
