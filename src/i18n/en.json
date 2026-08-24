@@ -1,0 +1,397 @@
+{
+  "site": {
+    "tagline": "SketchUp plugins for landscape professionals.",
+    "description": "{siteName} builds four SketchUp plugins for landscape professionals: quantity take-off, survey point import, material management and criteria-based selection."
+  },
+  "meta": {
+    "home": {
+      "title": "{siteName} — SketchUp plugins for landscape professionals",
+      "description": "Four SketchUp plugins for everyday landscape work: take-off and quotes, survey point import, materials and components, criteria-based selection."
+    },
+    "about": {
+      "title": "About — {siteName}",
+      "description": "Who builds the {siteName} plugins, how they are designed, and where the project stands today."
+    },
+    "contact": {
+      "title": "Get notified at launch — {siteName}",
+      "description": "Leave your email address to hear when the {siteName} plugins become available."
+    },
+    "contactSuccess": {
+      "title": "Message received — {siteName}",
+      "description": "Your request has been recorded."
+    },
+    "contactError": {
+      "title": "Your message was not sent — {siteName}",
+      "description": "The form could not be submitted."
+    },
+    "legal": {
+      "title": "Legal notice — {siteName}",
+      "description": "Legal information about the {siteName} website."
+    },
+    "privacy": {
+      "title": "Privacy policy — {siteName}",
+      "description": "What data the {siteName} website collects, why, and how to exercise your rights."
+    },
+    "notFound": {
+      "title": "Page not found — {siteName}",
+      "description": "This page does not exist."
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Plugins",
+    "about": "About",
+    "contact": "Contact",
+    "mainLabel": "Main navigation",
+    "openMenu": "Open the menu",
+    "closeMenu": "Close the menu",
+    "skipToContent": "Skip to main content"
+  },
+  "language": {
+    "label": "Language",
+    "switchTo": "View this page in {language}"
+  },
+  "common": {
+    "learnMore": "Read more",
+    "backHome": "Back to home",
+    "optional": "optional",
+    "emailLabel": "Email address"
+  },
+  "home": {
+    "hero": {
+      "badge": "Not released yet",
+      "title": "Four SketchUp plugins for the daily work of landscape professionals",
+      "subtitle": "Take-off, site surveys, materials, selection: tools that absorb the repetitive steps of a landscape project in SketchUp.",
+      "primaryCta": "Get notified at launch",
+      "secondaryCta": "See the four plugins"
+    },
+    "value": {
+      "title": "What these plugins take care of",
+      "items": [
+        {
+          "title": "From drawing to quote",
+          "text": "Measuring happens straight on the model, and the quantities land in a spreadsheet you can build your quote from."
+        },
+        {
+          "title": "From survey to model",
+          "text": "A surveyor's coordinate file becomes a usable set of 3D points, with nothing to retype."
+        },
+        {
+          "title": "Fewer repetitive steps",
+          "text": "Searching for materials, sorting them into folders, selecting by criteria: everyday handling that costs less time on heavy models."
+        }
+      ]
+    },
+    "products": {
+      "title": "The four plugins",
+      "intro": "Each one answers a specific task in the day-to-day of a landscape project."
+    },
+    "compatibility": {
+      "intro": "Every plugin is developed and tested against recent releases of the host application."
+    },
+    "status": {
+      "title": "Where {siteName} stands",
+      "body": "The four plugins are written and working. They are not on sale yet: a trial with a small group of professionals is planned before anything is released. If this is relevant to your work, leave your address and you will hear about it.",
+      "link": "Leave my address"
+    },
+    "cta": {
+      "title": "Get notified at launch",
+      "body": "An email address is all it takes. It will only be used to announce that the plugins are available.",
+      "button": "Go to the form"
+    }
+  },
+  "products": {
+    "sectionTitle": "The plugins",
+    "featuresTitle": "What the plugin does",
+    "stepsTitle": "How it is used",
+    "otherProducts": "The other plugins",
+    "items": {
+      "quantisketch": {
+        "tagline": "Quantity take-off",
+        "summary": "Click the elements in your drawing to add them to a basket — areas, lengths, objects — then export the basket to Excel to build the quote.",
+        "metaTitle": "{name} — quantity take-off inside SketchUp",
+        "metaDescription": "Click elements in the model to build a basket of quantities — areas, lengths, objects — then export it to Excel as the basis for your quote.",
+        "features": [
+          {
+            "title": "A basket of quantities",
+            "text": "Every element you click in the drawing joins the basket, which you can review as the take-off goes along."
+          },
+          {
+            "title": "Areas, lengths and objects",
+            "text": "The three kinds of quantity a landscape project needs sit in the same basket."
+          },
+          {
+            "title": "Export to Excel",
+            "text": "The basket leaves as a spreadsheet, ready to serve as the basis for the quote."
+          }
+        ],
+        "steps": [
+          {
+            "title": "Open the basket",
+            "text": "It stays within reach while you work on the model."
+          },
+          {
+            "title": "Click the elements to measure",
+            "text": "Each click adds the element and its quantity to the basket."
+          },
+          {
+            "title": "Export to Excel",
+            "text": "The resulting file mirrors the contents of the basket."
+          }
+        ]
+      },
+      "csvPoints": {
+        "tagline": "Survey import",
+        "summary": "A surveyor's CSV file becomes a set of 3D points inside SketchUp, carrying their labels and their layers.",
+        "metaTitle": "{name} — from surveyor's file to SketchUp model",
+        "metaDescription": "Turn a CSV coordinate file into 3D points inside SketchUp, with labels and layers, without retyping anything.",
+        "features": [
+          {
+            "title": "Reads the coordinate file",
+            "text": "The CSV your surveyor sends is read as it is, with no prior conversion."
+          },
+          {
+            "title": "3D points in the model",
+            "text": "Each coordinate row becomes a point placed in the model."
+          },
+          {
+            "title": "Labels carried over",
+            "text": "Points keep the label from the survey, so you can tell them apart in the model."
+          },
+          {
+            "title": "Spread across layers",
+            "text": "Points are assigned to layers, so you can show or hide them by group."
+          }
+        ],
+        "steps": [
+          {
+            "title": "Get the survey CSV",
+            "text": "The coordinate file exactly as your surveyor's tool produces it."
+          },
+          {
+            "title": "Run the import",
+            "text": "The plugin reads the file and creates the points in the model."
+          },
+          {
+            "title": "Work on the survey",
+            "text": "The points are in place, with their labels and their layers."
+          }
+        ]
+      },
+      "paletteXl": {
+        "tagline": "Materials and components",
+        "summary": "A roomier way to handle materials and components than the built-in panel: a larger window, search by name, and folders of your own.",
+        "metaTitle": "{name} — handling SketchUp materials and components",
+        "metaDescription": "A larger window for SketchUp materials and components, with search by name and folders you organise yourself.",
+        "features": [
+          {
+            "title": "A larger window",
+            "text": "More room on screen to browse through materials and components."
+          },
+          {
+            "title": "Search by name",
+            "text": "Find an item by typing its name instead of scrolling the list."
+          },
+          {
+            "title": "Folders of your own",
+            "text": "Items are filed into folders, following whatever order suits you."
+          },
+          {
+            "title": "Materials and components together",
+            "text": "Both kinds of item are handled from the same window."
+          }
+        ],
+        "steps": [
+          {
+            "title": "Open the window",
+            "text": "It stands in for the built-in panel while you work."
+          },
+          {
+            "title": "Search or browse",
+            "text": "By name, or by walking through your folders."
+          },
+          {
+            "title": "Apply to the model",
+            "text": "The item you pick is applied the usual way."
+          }
+        ]
+      },
+      "multiSelect": {
+        "tagline": "Selection by criteria",
+        "summary": "Select several entities of the model at once by criteria, instead of one by one — which starts to matter once a project grows large.",
+        "metaTitle": "{name} — selecting SketchUp entities by criteria",
+        "metaDescription": "Select many entities of a SketchUp model at once by criteria, rather than one by one, on large projects.",
+        "features": [
+          {
+            "title": "Selection by criteria",
+            "text": "Matching entities are picked up from the criteria you set, with no click on each one."
+          },
+          {
+            "title": "Several entities at once",
+            "text": "The resulting selection behaves like any other SketchUp selection."
+          },
+          {
+            "title": "Built for heavy models",
+            "text": "The gain grows with the size of the project, where selecting by hand becomes expensive."
+          }
+        ],
+        "steps": [
+          {
+            "title": "Set the criteria",
+            "text": "They decide which entities are picked up."
+          },
+          {
+            "title": "Run the selection",
+            "text": "Matching entities are selected together."
+          },
+          {
+            "title": "Work on the whole set",
+            "text": "From there it behaves like a selection made by hand."
+          }
+        ]
+      }
+    }
+  },
+  "compatibility": {
+    "title": "Compatibility",
+    "keyFigureLabel": "Tested releases",
+    "supported": "Tested on {app} {versions} under {os}.",
+    "macNote": "Behaviour on Mac has not been tested to date."
+  },
+  "about": {
+    "title": "About",
+    "intro": "{siteName} is the work of an independent developer, who writes and maintains the four plugins alone.",
+    "sections": [
+      {
+        "title": "Who builds this",
+        "body": "There is no team behind these plugins: design, Ruby development and keeping up with SketchUp releases are all handled by one person. Which means you talk to that person directly, with nobody in between."
+      },
+      {
+        "title": "The approach",
+        "body": "Each plugin starts from one precise, repetitive task in SketchUp, and stops there. Nothing is added for the sake of a longer feature list: a tool that does one thing well is easier to learn and easier to fix."
+      },
+      {
+        "title": "Where the project stands",
+        "body": "The four plugins work and are tested on {app} {versions} under {os}. Behaviour on Mac has not been tested to date. Nothing is on sale yet: a trial with a small group of professionals is planned, and their feedback will shape what comes next."
+      }
+    ]
+  },
+  "contact": {
+    "title": "Get notified at launch",
+    "intro": "Leave your email address to hear when the plugins become available. Feel free to add a message describing your work or asking a question.",
+    "fallback": {
+      "label": "You can also write directly to:",
+      "note": "The form above reaches the very same address."
+    },
+    "form": {
+      "legend": "Your details",
+      "name": "Name",
+      "email": "Email address",
+      "message": "Message",
+      "emailHint": "Used only to tell you when the plugins are available.",
+      "messageHint": "2,000 characters at most.",
+      "consent": "I agree to my email address being kept so that I can be told about the launch.",
+      "privacyLink": "Read the privacy policy",
+      "submit": "Send",
+      "sending": "Sending…"
+    },
+    "errors": {
+      "method": "Method not allowed.",
+      "payload": "The form could not be read.",
+      "email": "The email address you entered is not valid.",
+      "consent": "Your agreement is required before your address can be kept.",
+      "tooLong": "One of the fields is longer than allowed.",
+      "rateLimit": "Too many messages from this connection. Please try again in an hour.",
+      "server": "Sending failed. Try again later, or write directly to the address shown."
+    },
+    "status": {
+      "success": "Your address has been recorded. You will hear from us at launch.",
+      "label": "Submission status"
+    }
+  },
+  "formStatus": {
+    "success": {
+      "title": "Message received",
+      "body": "Your address has been recorded. You will hear from us as soon as the plugins are available.",
+      "back": "Back to home"
+    },
+    "error": {
+      "title": "Your message was not sent",
+      "body": "Your message could not be delivered. You can try again, or write directly to the address below.",
+      "back": "Back to the form"
+    }
+  },
+  "legal": {
+    "title": "Legal notice",
+    "disclaimer": "This page is incomplete: it must be filled in and reviewed by a legal professional before the site goes live.",
+    "sections": [
+      {
+        "title": "Site publisher",
+        "body": "The {siteName} website is published by [[TO COMPLETE: registered company name]], [[TO COMPLETE: legal form]], registered office at [[TO COMPLETE: postal address]], company number [[TO COMPLETE: registration number]]. VAT number: [[TO COMPLETE: VAT number]]."
+      },
+      {
+        "title": "Publication director",
+        "body": "[[TO COMPLETE: name of the publication director]]."
+      },
+      {
+        "title": "Hosting",
+        "body": "This site is hosted by [[TO COMPLETE: hosting provider, company name and address]]."
+      },
+      {
+        "title": "Contact",
+        "body": "Any question about this site can be sent to {email}."
+      },
+      {
+        "title": "Intellectual property",
+        "body": "The text, layout and graphic elements of this site belong to the publisher. Any reproduction, even partial, requires prior permission. Trade marks and software names mentioned here belong to their respective owners."
+      },
+      {
+        "title": "Liability",
+        "body": "The information published on this site is given for guidance and may change. The publisher cannot be held liable for the use made of it."
+      }
+    ]
+  },
+  "privacy": {
+    "title": "Privacy policy",
+    "disclaimer": "This page is incomplete: it must be filled in and reviewed by a legal professional before the site goes live.",
+    "sections": [
+      {
+        "title": "Data controller",
+        "body": "The data controller is [[TO COMPLETE: registered company name]], [[TO COMPLETE: postal address]], reachable at {email}."
+      },
+      {
+        "title": "What is collected",
+        "body": "The contact form collects your email address and, if you choose to fill them in, your name and your message. Nothing else is asked for. No account is created and no payment is handled on this site."
+      },
+      {
+        "title": "Purpose and legal basis",
+        "body": "This data is used solely to answer your message and to tell you when the plugins become available. The processing rests on your consent, given through the checkbox on the form. You may withdraw it at any time by writing to {email}."
+      },
+      {
+        "title": "Recipients and processors",
+        "body": "Your data is passed to the following providers: [[TO COMPLETE: processor hosting the website, company name, country, transfer safeguards]] and [[TO COMPLETE: processor sending the emails, company name, country, transfer safeguards]]. It is never sold or handed to third parties."
+      },
+      {
+        "title": "How long it is kept",
+        "body": "Messages and addresses collected are kept for [[TO COMPLETE: retention period, for example three years from the last contact]], then deleted."
+      },
+      {
+        "title": "Your rights",
+        "body": "You have the right to access, correct, erase, restrict and object to the processing of your data, as well as the right to data portability. To exercise them: [[TO COMPLETE: how to exercise these rights, dedicated address and response time]]. You may also lodge a complaint with the French data protection authority (CNIL)."
+      },
+      {
+        "title": "Protection against abuse",
+        "body": "To limit automated submissions, the number of messages sent from one connection is capped. This measure does not keep your IP address: only a non-reversible fingerprint is stored for one hour, then erased."
+      },
+      {
+        "title": "Cookies and analytics",
+        "body": "This site sets no cookies and uses no analytics tool."
+      }
+    ]
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "The page you asked for does not exist, or it has been moved.",
+    "cta": "Back to home"
+  }
+}
