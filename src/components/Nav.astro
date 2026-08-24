@@ -1,0 +1,50 @@
+---
+import { getDictionary, type Locale } from '../i18n/ui';
+import { pathFor, productsHref, type RouteId } from '../i18n/routes';
+
+interface Props {
+  locale: Locale;
+  /** Absent sur la page 404, qui ne correspond a aucune route. */
+  pageId?: RouteId;
+}
+
+const { locale, pageId } = Astro.props;
+const t = getDictionary(locale);
+
+const items = [
+  { label: t.nav.home, href: pathFor('home', locale), current: pageId === 'home' },
+  {
+    label: t.nav.products,
+    href: productsHref(locale),
+    current: pageId?.startsWith('products.') ?? false,
+  },
+  { label: t.nav.about, href: pathFor('about', locale), current: pageId === 'about' },
+  {
+    label: t.nav.contact,
+    href: pathFor('contact', locale),
+    current: pageId === 'contact' || pageId === 'contactSuccess' || pageId === 'contactError',
+  },
+];
+---
+
+<nav aria-label={t.nav.mainLabel}>
+  <ul class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
+    {
+      items.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            aria-current={item.current ? 'page' : undefined}
+            class={
+              item.current
+                ? 'font-medium text-accent'
+                : 'text-muted transition-colors hover:text-ink'
+            }
+          >
+            {item.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

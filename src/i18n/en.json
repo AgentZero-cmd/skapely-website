@@ -43,8 +43,6 @@
     "about": "About",
     "contact": "Contact",
     "mainLabel": "Main navigation",
-    "openMenu": "Open the menu",
-    "closeMenu": "Close the menu",
     "skipToContent": "Skip to main content"
   },
   "language": {
@@ -52,14 +50,19 @@
     "switchTo": "View this page in {language}"
   },
   "common": {
+    "statusBadge": "Not released yet",
     "learnMore": "Read more",
     "backHome": "Back to home",
     "optional": "optional",
     "emailLabel": "Email address"
   },
+  "footer": {
+    "siteSection": "The site",
+    "legalSection": "Legal information",
+    "copyright": "© {year} {siteName}. All rights reserved."
+  },
   "home": {
     "hero": {
-      "badge": "Not released yet",
       "title": "Four SketchUp plugins for the daily work of landscape professionals",
       "subtitle": "Take-off, site surveys, materials, selection: tools that absorb the repetitive steps of a landscape project in SketchUp.",
       "primaryCta": "Get notified at launch",
@@ -391,7 +394,6 @@
   },
   "notFound": {
     "title": "Page not found",
-    "body": "The page you asked for does not exist, or it has been moved.",
-    "cta": "Back to home"
+    "body": "The page you asked for does not exist, or it has been moved."
   }
 }

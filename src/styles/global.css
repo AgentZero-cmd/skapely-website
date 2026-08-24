@@ -69,6 +69,62 @@
 }
 
 @layer components {
+  /* Boutons : partages entre les liens d'action et le bouton d'envoi du
+     formulaire. L'action principale est anthracite, jamais verte. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-control);
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background-color 150ms ease;
+  }
+
+  .btn-primary {
+    background-color: var(--color-ink);
+    color: #ffffff;
+  }
+
+  .btn-primary:hover {
+    background-color: color-mix(in oklab, var(--color-ink) 88%, white);
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.6;
+  }
+
+  .btn-secondary {
+    background-color: var(--color-surface);
+    color: var(--color-ink);
+    border: 1px solid var(--color-line);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--color-subtle);
+  }
+
+  /* Retour d'envoi du formulaire : vert pale en cas de succes (badge de statut),
+     anthracite sobre en cas d'echec. */
+  .form-status {
+    border-radius: var(--radius-control);
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .form-status[data-state='success'] {
+    background-color: var(--color-accent-soft);
+    color: var(--color-accent-strong);
+  }
+
+  .form-status[data-state='error'] {
+    background-color: var(--color-subtle);
+    color: var(--color-ink);
+    border-left: 3px solid var(--color-ink);
+  }
+
   /* Champs de formulaire : bordure grise au repos, vert + halo au focus. */
   .field {
     width: 100%;

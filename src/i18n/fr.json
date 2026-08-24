@@ -43,8 +43,6 @@
     "about": "À propos",
     "contact": "Contact",
     "mainLabel": "Navigation principale",
-    "openMenu": "Ouvrir le menu",
-    "closeMenu": "Fermer le menu",
     "skipToContent": "Aller au contenu principal"
   },
   "language": {
@@ -52,14 +50,19 @@
     "switchTo": "Afficher cette page en {language}"
   },
   "common": {
+    "statusBadge": "Lancement à venir",
     "learnMore": "En savoir plus",
     "backHome": "Retour à l'accueil",
     "optional": "facultatif",
     "emailLabel": "Adresse e-mail"
   },
+  "footer": {
+    "siteSection": "Le site",
+    "legalSection": "Informations légales",
+    "copyright": "© {year} {siteName}. Tous droits réservés."
+  },
   "home": {
     "hero": {
-      "badge": "Lancement à venir",
       "title": "Quatre plugins SketchUp pour le travail quotidien des paysagistes",
       "subtitle": "Métré, relevé de terrain, matériaux, sélection : des outils qui prennent en charge les gestes répétitifs d'un projet de paysage dans SketchUp.",
       "primaryCta": "Être prévenu du lancement",
@@ -391,7 +394,6 @@
   },
   "notFound": {
     "title": "Page introuvable",
-    "body": "La page demandée n'existe pas, ou elle a été déplacée.",
-    "cta": "Retour à l'accueil"
+    "body": "La page demandée n'existe pas, ou elle a été déplacée."
   }
 }

@@ -13,3 +13,6 @@ export const SITE_NAME = 'Skapely';
 
 /** Adresse de contact publique, affichee en clair sur la page contact. */
 export const CONTACT_EMAIL = `contact@${new URL(SITE_URL).hostname}`;
+
+/** Chemin de la Pages Function qui recoit le formulaire de contact. */
+export const SUBSCRIBE_ENDPOINT = '/api/subscribe';

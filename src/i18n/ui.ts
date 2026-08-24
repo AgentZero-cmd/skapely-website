@@ -15,6 +15,12 @@ export const localeNames: Record<Locale, string> = {
   en: 'English',
 };
 
+/** Etiquettes de langue Open Graph, derivees de la locale et non traduites. */
+export const openGraphLocales: Record<Locale, string> = {
+  fr: 'fr_FR',
+  en: 'en_GB',
+};
+
 /** Le dictionnaire francais fait foi : c'est lui qui definit le jeu de cles. */
 export type Dictionary = typeof fr;
 

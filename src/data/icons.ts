@@ -27,8 +27,6 @@ export const icons = {
   cube: '<path d="M12 3 3.5 7.5v9L12 21l8.5-4.5v-9L12 3Z"/><path d="m3.5 7.5 8.5 4.5 8.5-4.5M12 12v9"/>',
   arrowRight: '<path d="M5 12h14M13 6l6 6-6 6"/>',
   globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/>',
-  menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
-  close: '<path d="m6 6 12 12M18 6 6 18"/>',
   mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/>',
   check: '<path d="m5 13 4 4L19 7"/>',
 } as const;
