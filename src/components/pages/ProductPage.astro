@@ -1,0 +1,103 @@
+---
+import Badge from '../Badge.astro';
+import Button from '../Button.astro';
+import Card from '../Card.astro';
+import CompatibilityNote from '../CompatibilityNote.astro';
+import FeatureList from '../FeatureList.astro';
+import IconTile from '../IconTile.astro';
+import ProductCard from '../ProductCard.astro';
+import SectionHeading from '../SectionHeading.astro';
+import { getProduct, products, type Product } from '../../data/products';
+import { getDictionary, type Locale } from '../../i18n/ui';
+import { pathFor } from '../../i18n/routes';
+
+interface Props {
+  locale: Locale;
+  productId: Product['id'];
+}
+
+const { locale, productId } = Astro.props;
+const t = getDictionary(locale);
+const product = getProduct(productId);
+const item = t.products.items[productId];
+const others = products.filter((candidate) => candidate.id !== productId);
+---
+
+<section class="mx-auto max-w-6xl px-4 pt-16 pb-8 sm:px-6">
+  <p class="text-sm">
+    <a href={pathFor('home', locale)} class="text-muted underline hover:text-ink">
+      {t.common.backHome}
+    </a>
+  </p>
+
+  <div class="mt-8 max-w-3xl">
+    <IconTile name={product.icon} class="h-12 w-12" />
+    <h1 class="mt-6 text-4xl font-bold tracking-tight text-balance text-ink sm:text-5xl">
+      {product.name}
+    </h1>
+    <p class="mt-3 text-lg font-medium text-muted">{item.tagline}</p>
+    <p class="mt-6 text-base leading-relaxed text-muted">{item.summary}</p>
+    <p class="mt-6">
+      <Badge tone="accent">{t.common.statusBadge}</Badge>
+    </p>
+  </div>
+</section>
+
+<section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+  <SectionHeading title={t.products.featuresTitle} />
+  <div class="mt-10">
+    <FeatureList items={item.features} icons={product.featureIcons} />
+  </div>
+</section>
+
+<section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+  <SectionHeading title={t.products.stepsTitle} />
+  <ol class="mt-10 grid gap-6 sm:grid-cols-3">
+    {
+      item.steps.map((step, index) => (
+        <li class="h-full">
+          <Card class="h-full">
+            <span
+              class="inline-flex h-8 w-8 items-center justify-center rounded-chip bg-subtle text-sm font-semibold text-ink"
+              aria-hidden="true"
+            >
+              {index + 1}
+            </span>
+            <h3 class="mt-5 text-base font-semibold text-ink">{step.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">{step.text}</p>
+          </Card>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+  <SectionHeading title={t.compatibility.title} />
+  <div class="mt-10">
+    <CompatibilityNote locale={locale} />
+  </div>
+</section>
+
+<section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+  <SectionHeading title={t.products.otherProducts} />
+  <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      others.map((other) => (
+        <li class="h-full">
+          <ProductCard locale={locale} product={other} />
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+  <Card class="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
+    <div class="max-w-xl">
+      <h2 class="text-2xl font-bold tracking-tight text-ink">{t.home.cta.title}</h2>
+      <p class="mt-3 text-base leading-relaxed text-muted">{t.home.cta.body}</p>
+    </div>
+    <Button href={pathFor('contact', locale)} class="shrink-0">{t.home.cta.button}</Button>
+  </Card>
+</section>
