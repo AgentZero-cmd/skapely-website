@@ -18,9 +18,17 @@ const MAX_SUBMISSIONS_PER_HOUR = 5;
 const RATE_LIMIT_WINDOW_SECONDS = 3600;
 
 /**
- * Corps de la notification envoyee a l'exploitant du site. Ce texte ne
- * s'affiche jamais sur le site : il n'a donc pas sa place dans les fichiers de
- * traduction, dont le role est le contenu visible par les visiteurs.
+ * Corps de la notification envoyee a l'exploitant du site.
+ *
+ * Ce texte reste en francais et hors des fichiers de traduction. C'est un choix
+ * assume, pas un oubli : l'exploitant du site en est le destinataire unique, ce
+ * message n'apparait sur aucune page, et le faire transiter par src/i18n/*.json
+ * polluerait les dictionnaires avec du contenu qu'aucun visiteur ne lira jamais.
+ * La regle « aucune chaine visible codee en dur » vise les pages et les
+ * composants ; elle ne s'applique pas ici.
+ *
+ * Les messages renvoyes au visiteur, eux, viennent bien des dictionnaires :
+ * voir messageFor() plus bas.
  */
 const NOTIFICATION = {
   subject: 'Nouveau contact depuis le site',
