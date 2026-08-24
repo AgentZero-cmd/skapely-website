@@ -30,6 +30,83 @@ npm run check:functions   # typage de functions/ avec son propre tsconfig
 `npm run check` doit passer avant tout commit : `astro check` ne couvre pas `functions/`,
 d'où le script dédié.
 
+## Vulnérabilités npm et version d'Astro
+
+`npm install` signale des vulnérabilités. Voici l'état relevé le **24 août 2026**, pour
+ne pas avoir à refaire l'analyse à chaque installation. **Ne pas lancer
+`npm audit fix --force`** : la seule correction proposée est une montée en Astro 7, qui
+est une décision à prendre (voir plus bas), pas un correctif automatique.
+
+### Ce qui est signalé
+
+`npm audit` remonte trois paquets et dix avis au total :
+
+| Paquet | Sévérité npm | Version installée | Origine |
+| --- | --- | --- | --- |
+| `astro` | high | 5.18.2 | dépendance directe |
+| `esbuild` | low | 0.27.7 | tiré par `astro` |
+| `sharp` | high | 0.34.5 | tiré par `astro` |
+
+Les huit avis portés par `astro` lui-même, avec la version qui les corrige :
+
+| Avis | Sévérité | Corrigé en |
+| --- | --- | --- |
+| XSS `define:vars`, balise `</script>` mal assainie | moderate | 6.1.6 |
+| Rejeu des paramètres chiffrés des server islands | low | 6.1.10 |
+| XSS par noms d'attributs en spread | moderate | 6.4.6 |
+| XSS spread dans `renderHTMLElement` | moderate | 7.0.6 |
+| XSS sur les directives `transition:*` d'îlots hydratés | low | 7.0.4 |
+| XSS réfléchi, propriétés d'animation de View Transitions | moderate | après 7.0.9 |
+| SSRF par en-tête Host sur la page d'erreur prérendue | high | 6.4.6 |
+| XSS réfléchi par nom de slot | high | 6.3.3 |
+
+À noter : `wrangler` tire ses propres copies d'`esbuild` (0.28.1) et de `sharp` (0.35.2),
+toutes deux **hors des plages vulnérables**. Seules les copies tirées par `astro` sont
+concernées.
+
+### Pourquoi le site publié n'est pas atteint
+
+Chaque point ci-dessous a été vérifié sur ce dépôt, pas supposé :
+
+- **Aucun runtime en production.** `output: 'static'` et aucun adaptateur : `dist/` ne
+  contient aucun fichier JavaScript serveur. Cloudflare Pages sert des fichiers HTML déjà
+  rendus, Astro ne s'exécute jamais côté serveur. Or les avis « XSS réfléchi » et « SSRF
+  par en-tête Host » supposent un rendu au moment de la requête.
+- **Aucune des fonctionnalités visées n'est utilisée** : zéro `define:vars`, zéro
+  `server:defer`, zéro directive `transition:*` (les occurrences de `transition:` dans le
+  CSS sont des propriétés d'animation, sans rapport), ni `ClientRouter` ni
+  `ViewTransitions`, aucun slot nommé, aucun spread d'attributs `{...}`.
+- **Le rendu au build ne consomme que nos propres fichiers** (`src/i18n/*.json`,
+  `src/data/`), jamais une entrée extérieure.
+- **`sharp` n'est jamais appelé** : pas d'`astro:assets`, pas de composant `<Image>`,
+  aucune image dans le dépôt. Les CVE libvips supposent le traitement d'une image.
+- **L'avis `esbuild` ne vise que le serveur de développement propre à esbuild**
+  (`--servedir`), et sur Windows uniquement (« This issue affects Windows environments
+  only »). `astro dev` sert les fichiers via Vite ; esbuild n'intervient que pour la
+  transformation et le bundling. À garder en tête si le poste de développement est sous
+  Windows, mais le chemin vulnérable n'est pas emprunté.
+
+Le risque résiduel se limite donc à la machine de développement, pas au site déployé.
+
+### Version d'Astro : décision à prendre
+
+État du registre npm au 24 août 2026 :
+
+- dernière version publiée : **7.2.6**, le 24 août 2026 ;
+- **Astro 6.0.0** : 10 mars 2026 — **Astro 7.0.0** : 22 juin 2026 ;
+- version installée : **5.18.2**, publiée le 26 mai 2026, qui est la **dernière 5.x
+  existante**.
+
+Aucun des correctifs listés plus haut n'a été rétroporté dans la branche 5 : ils
+atterrissent en 6.1.6, 6.3.3, 6.4.6, 7.0.4 et 7.0.6.
+
+**Le site publié n'est pas atteint, mais Astro 5.18.2 est la dernière 5.x et ne reçoit
+plus de correctifs de sécurité ; une migration vers la majeure courante est à décider.**
+
+Cette décision se prend séparément et n'est pas tranchée ici. Si elle est prise, elle
+implique de relire les notes de migration 5 → 6 → 7 et de revérifier la configuration
+i18n, `trailingSlash` et `build.format`, sur lesquelles repose la forme des URL.
+
 ## Structure
 
 ```
@@ -112,16 +189,37 @@ s'utilisent comme classes (`bg-canvas`, `text-ink`, `rounded-card`, `shadow-card
 valeur hexadécimale ne doit être répétée dans le markup.
 
 **Règle du vert.** Le vert `#16A34A` est un accent rare, jamais une couleur de
-remplissage. Il est réservé à quatre usages, et il ne doit pas y avoir plus de quatre
-zones vertes sur une page, halo de focus compris :
+remplissage. Il est réservé à quatre usages, et à rien d'autre :
 
-1. le badge de statut (fond vert pâle, texte vert foncé) ;
+1. le badge de statut (fond vert pâle `#DCFCE7`, texte vert foncé `#15803D`) ;
 2. un chiffre clé par page ;
 3. l'élément de navigation actif, un seul ;
 4. le halo de focus des champs et des éléments focusables.
 
-Les liens de navigation, de pied de page et de carte sont en anthracite. Les boutons
-d'action principaux sont en anthracite, jamais en vert.
+**Plafond : 3 zones vertes permanentes par page.**
+
+Le halo de focus (usage 4) est **exclu du comptage** : il est transitoire, n'apparaît que
+sur un élément à la fois, et c'est un signal d'accessibilité, pas de la décoration. Il ne
+doit jamais être retiré ou atténué pour tenir le plafond.
+
+État actuel : l'accueil et les pages produit sont **à 3/3** — élément de navigation actif,
+badge « Lancement à venir », chiffre clé « 2024–2026 ». **Il n'y a plus aucune marge :
+toute nouvelle zone verte impose d'en retirer une autre.** La page contact est à 2 (nav
+actif, case de consentement cochée), plus le message de succès du formulaire quand il
+s'affiche.
+
+Ne sont pas verts, et ne doivent pas le devenir : les liens de navigation, les liens du
+pied de page, les liens de carte (« En savoir plus »), et les boutons d'action principaux,
+tous en anthracite. Les pastilles d'icônes sont en gris `#F3F4F6`.
+
+Pour recompter après une modification, lister **nommément** les éléments rendus qui
+portent `text-accent`, `bg-accent-soft` ou `accent-accent` dans `dist/`, plutôt que de se
+contenter d'un nombre d'occurrences de classes :
+
+```bash
+npm run build
+grep -o '<[^>]*\(text-accent\|bg-accent-soft\|accent-accent\)[^>]*>[^<]\{0,60\}' dist/index.html
+```
 
 ## Formulaire de contact
 
