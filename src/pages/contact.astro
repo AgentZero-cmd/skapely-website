@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactPage from '../components/pages/ContactPage.astro';
+import { getDictionary, format } from '../i18n/ui';
+import { SITE_NAME } from '../site.config';
+
+const locale = 'fr' as const;
+const t = getDictionary(locale);
+---
+
+<BaseLayout
+  locale={locale}
+  pageId="contact"
+  title={format(t.meta.contact.title, { siteName: SITE_NAME })}
+  description={format(t.meta.contact.description, { siteName: SITE_NAME })}
+>
+  <ContactPage locale={locale} />
+</BaseLayout>

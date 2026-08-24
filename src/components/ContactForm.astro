@@ -1,0 +1,163 @@
+---
+import { getDictionary, type Locale } from '../i18n/ui';
+import { pathFor } from '../i18n/routes';
+import { SUBSCRIBE_ENDPOINT } from '../site.config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+---
+
+<form
+  method="post"
+  action={SUBSCRIBE_ENDPOINT}
+  data-contact-form
+  data-error-message={t.contact.errors.server}
+  class="space-y-6"
+>
+  <!-- Locale du visiteur : sert a rediriger vers la bonne page de confirmation
+       quand le navigateur n'execute pas de JavaScript. -->
+  <input type="hidden" name="locale" value={locale} />
+
+  <!-- Piege a robots : invisible et hors du parcours clavier comme du parcours
+       de lecture d'ecran. Un envoi qui le remplit est ignore par le serveur. -->
+  <div class="hidden" aria-hidden="true">
+    <input type="text" name="website" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <fieldset class="space-y-6 border-0 p-0">
+    <legend class="sr-only">{t.contact.form.legend}</legend>
+
+    <div>
+      <label for="name" class="block text-sm font-medium text-ink">
+        {t.contact.form.name}
+        <span class="font-normal text-muted">({t.common.optional})</span>
+      </label>
+      <input
+        id="name"
+        name="name"
+        type="text"
+        maxlength="100"
+        autocomplete="name"
+        class="field mt-2"
+      />
+    </div>
+
+    <div>
+      <label for="email" class="block text-sm font-medium text-ink">
+        {t.contact.form.email}
+      </label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        required
+        maxlength="254"
+        autocomplete="email"
+        aria-describedby="email-hint"
+        class="field mt-2"
+      />
+      <p id="email-hint" class="mt-2 text-xs text-muted">{t.contact.form.emailHint}</p>
+    </div>
+
+    <div>
+      <label for="message" class="block text-sm font-medium text-ink">
+        {t.contact.form.message}
+        <span class="font-normal text-muted">({t.common.optional})</span>
+      </label>
+      <textarea
+        id="message"
+        name="message"
+        rows="5"
+        maxlength="2000"
+        aria-describedby="message-hint"
+        class="field mt-2"></textarea>
+      <p id="message-hint" class="mt-2 text-xs text-muted">{t.contact.form.messageHint}</p>
+    </div>
+
+    <div class="flex gap-3">
+      <input
+        id="consent"
+        name="consent"
+        type="checkbox"
+        value="yes"
+        required
+        class="mt-1 h-4 w-4 shrink-0 rounded-chip border-line accent-accent"
+      />
+      <div>
+        <label for="consent" class="block text-sm leading-relaxed text-ink">
+          {t.contact.form.consent}
+        </label>
+        <a
+          href={pathFor('privacy', locale)}
+          class="mt-1 inline-block text-sm text-muted underline hover:text-ink"
+        >
+          {t.contact.form.privacyLink}
+        </a>
+      </div>
+    </div>
+  </fieldset>
+
+  <p
+    class="form-status"
+    data-form-status
+    aria-label={t.contact.status.label}
+    role="status"
+    hidden
+  >
+  </p>
+
+  <button
+    type="submit"
+    class="btn btn-primary w-full sm:w-auto"
+    data-sending-label={t.contact.form.sending}
+  >
+    {t.contact.form.submit}
+  </button>
+</form>
+
+<script>
+  // Amelioration progressive : sans ce script, le formulaire est poste
+  // normalement et le serveur redirige vers une page de confirmation.
+  const form = document.querySelector<HTMLFormElement>('form[data-contact-form]');
+  const status = form?.querySelector<HTMLParagraphElement>('[data-form-status]');
+  const submitButton = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+  if (form && status && submitButton) {
+    const idleLabel = submitButton.textContent ?? '';
+    const sendingLabel = submitButton.dataset.sendingLabel ?? idleLabel;
+    const networkErrorMessage = form.dataset.errorMessage ?? '';
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      submitButton.disabled = true;
+      submitButton.textContent = sendingLabel;
+      status.hidden = true;
+
+      const finish = (ok: boolean, message: string) => {
+        status.dataset.state = ok ? 'success' : 'error';
+        status.textContent = message;
+        status.hidden = false;
+        submitButton.disabled = false;
+        submitButton.textContent = idleLabel;
+        if (ok) {
+          form.reset();
+        }
+      };
+
+      fetch(form.action, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(form),
+      })
+        .then(async (response) => {
+          const payload = (await response.json()) as { ok?: boolean; message?: string };
+          finish(response.ok && payload.ok === true, payload.message ?? networkErrorMessage);
+        })
+        .catch(() => finish(false, networkErrorMessage));
+    });
+  }
+</script>

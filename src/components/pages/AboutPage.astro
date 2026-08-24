@@ -1,0 +1,54 @@
+---
+import Button from '../Button.astro';
+import Card from '../Card.astro';
+import { compatibility } from '../../data/compatibility';
+import { getDictionary, format, type Locale } from '../../i18n/ui';
+import { pathFor } from '../../i18n/routes';
+import { SITE_NAME } from '../../site.config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+
+const values = {
+  siteName: SITE_NAME,
+  app: compatibility.app,
+  versions: compatibility.versionList,
+  os: compatibility.os,
+};
+---
+
+<section class="mx-auto max-w-3xl px-4 pt-16 pb-8 sm:px-6 sm:pt-24">
+  <h1 class="text-4xl font-bold tracking-tight text-ink sm:text-5xl">{t.about.title}</h1>
+  <p class="mt-6 text-lg leading-relaxed text-muted">
+    {format(t.about.intro, values)}
+  </p>
+</section>
+
+<section class="mx-auto max-w-3xl px-4 py-8 sm:px-6">
+  <div class="space-y-6">
+    {
+      t.about.sections.map((section) => (
+        <Card>
+          <h2 class="text-xl font-semibold text-ink">{section.title}</h2>
+          <p class="mt-3 text-base leading-relaxed text-muted">
+            {format(section.body, values)}
+          </p>
+        </Card>
+      ))
+    }
+  </div>
+</section>
+
+<section class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+  <Card class="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      <h2 class="text-2xl font-bold tracking-tight text-ink">{t.home.cta.title}</h2>
+      <p class="mt-3 text-base leading-relaxed text-muted">{t.home.cta.body}</p>
+    </div>
+    <Button href={pathFor('contact', locale)} class="shrink-0">{t.home.cta.button}</Button>
+  </Card>
+</section>
