@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ProductPage from '../../../components/pages/ProductPage.astro';
+import { getDictionary, format } from '../../../i18n/ui';
+import { getProduct } from '../../../data/products';
+
+const locale = 'en' as const;
+const productId = 'csvPoints' as const;
+const t = getDictionary(locale);
+const product = getProduct(productId);
+const item = t.products.items[productId];
+---
+
+<BaseLayout
+  locale={locale}
+  pageId={product.route}
+  title={format(item.metaTitle, { name: product.name })}
+  description={format(item.metaDescription, { name: product.name })}
+>
+  <ProductPage locale={locale} productId={productId} />
+</BaseLayout>

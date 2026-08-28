@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HomePage from '../../components/pages/HomePage.astro';
+import { getDictionary, format } from '../../i18n/ui';
+import { SITE_NAME } from '../../site.config';
+
+const locale = 'en' as const;
+const t = getDictionary(locale);
+---
+
+<BaseLayout
+  locale={locale}
+  pageId="home"
+  title={format(t.meta.home.title, { siteName: SITE_NAME })}
+  description={format(t.meta.home.description, { siteName: SITE_NAME })}
+>
+  <HomePage locale={locale} />
+</BaseLayout>

@@ -1,0 +1,34 @@
+---
+import Nav from './Nav.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { SITE_NAME } from '../site.config';
+import { pathFor } from '../i18n/routes';
+import type { Locale } from '../i18n/ui';
+import type { RouteId } from '../i18n/routes';
+
+interface Props {
+  locale: Locale;
+  pageId?: RouteId;
+}
+
+const { locale, pageId } = Astro.props;
+---
+
+<header class="border-b border-line bg-surface">
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-4 px-4 py-4 sm:px-6">
+    <a
+      href={pathFor('home', locale)}
+      class="text-base font-bold tracking-tight text-ink"
+    >
+      {SITE_NAME}
+    </a>
+
+    <div class="order-last w-full sm:order-none sm:ml-auto sm:w-auto">
+      <Nav locale={locale} pageId={pageId} />
+    </div>
+
+    <div class="ml-auto sm:ml-0">
+      <LanguageSwitcher locale={locale} pageId={pageId} />
+    </div>
+  </div>
+</header>

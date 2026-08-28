@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LegalTextPage from '../../components/pages/LegalTextPage.astro';
+import { getDictionary, format } from '../../i18n/ui';
+import { SITE_NAME } from '../../site.config';
+
+const locale = 'en' as const;
+const t = getDictionary(locale);
+---
+
+<BaseLayout
+  locale={locale}
+  pageId="legal"
+  title={format(t.meta.legal.title, { siteName: SITE_NAME })}
+  description={format(t.meta.legal.description, { siteName: SITE_NAME })}
+>
+  <LegalTextPage locale={locale} kind="legal" />
+</BaseLayout>

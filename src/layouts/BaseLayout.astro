@@ -1,0 +1,70 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { getDictionary, locales, openGraphLocales, type Locale } from '../i18n/ui';
+import { isUnlisted, urlFor, type RouteId } from '../i18n/routes';
+import { SITE_NAME, SITE_URL } from '../site.config';
+
+interface Props {
+  locale: Locale;
+  /** Absent pour la page 404, qui ne correspond a aucune route publiee. */
+  pageId?: RouteId;
+  title: string;
+  description: string;
+}
+
+const { locale, pageId, title, description } = Astro.props;
+const t = getDictionary(locale);
+
+// Les pages de confirmation du formulaire et la 404 ne sont ni indexees ni
+// declinees en liens alternatifs : elles n'ont pas d'equivalent a referencer.
+const published = pageId !== undefined && !isUnlisted(pageId);
+const canonical = published ? urlFor(pageId, locale) : undefined;
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    {canonical && <link rel="canonical" href={canonical} />}
+    {
+      published &&
+        locales.map((code) => (
+          <link rel="alternate" hreflang={code} href={urlFor(pageId, code)} />
+        ))
+    }
+    {published && <link rel="alternate" hreflang="x-default" href={urlFor(pageId, 'fr')} />}
+    {!published && <meta name="robots" content="noindex, follow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical ?? SITE_URL} />
+    <meta property="og:locale" content={openGraphLocales[locale]} />
+    <meta name="twitter:card" content="summary" />
+  </head>
+
+  <body class="flex min-h-screen flex-col">
+    <a
+      href="#contenu"
+      class="sr-only rounded-control bg-ink px-4 py-2 text-sm text-white focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-10"
+    >
+      {t.nav.skipToContent}
+    </a>
+
+    <Header locale={locale} pageId={pageId} />
+
+    <main id="contenu" class="flex-1">
+      <slot />
+    </main>
+
+    <Footer locale={locale} />
+  </body>
+</html>

@@ -1,0 +1,17 @@
+---
+import Icon from './Icon.astro';
+import type { IconName } from '../data/icons';
+
+interface Props {
+  name: IconName;
+  class?: string;
+}
+
+const { name, class: className = '' } = Astro.props;
+---
+
+<span
+  class={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-chip bg-subtle text-muted ${className}`}
+>
+  <Icon name={name} />
+</span>

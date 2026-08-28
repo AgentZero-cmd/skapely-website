@@ -1,0 +1,399 @@
+{
+  "site": {
+    "tagline": "Des plugins SketchUp pour les professionnels du paysage.",
+    "description": "{siteName} édite quatre plugins SketchUp destinés aux paysagistes : métré et quantitatif, import de relevés de géomètre, gestion des matériaux, sélection par critères."
+  },
+  "meta": {
+    "home": {
+      "title": "{siteName} — plugins SketchUp pour les paysagistes",
+      "description": "Quatre plugins SketchUp pour le travail courant des paysagistes : métré et devis, import de relevés de géomètre, matériaux et composants, sélection par critères."
+    },
+    "about": {
+      "title": "À propos — {siteName}",
+      "description": "Qui édite les plugins {siteName}, comment ils sont conçus, et où en est le projet aujourd'hui."
+    },
+    "contact": {
+      "title": "Être prévenu du lancement — {siteName}",
+      "description": "Laissez votre adresse e-mail pour être prévenu de la mise à disposition des plugins {siteName}."
+    },
+    "contactSuccess": {
+      "title": "Message bien reçu — {siteName}",
+      "description": "Votre demande a été enregistrée."
+    },
+    "contactError": {
+      "title": "L'envoi n'a pas abouti — {siteName}",
+      "description": "Le formulaire n'a pas pu être envoyé."
+    },
+    "legal": {
+      "title": "Mentions légales — {siteName}",
+      "description": "Informations légales relatives au site {siteName}."
+    },
+    "privacy": {
+      "title": "Politique de confidentialité — {siteName}",
+      "description": "Quelles données sont collectées par le site {siteName}, pourquoi, et comment exercer vos droits."
+    },
+    "notFound": {
+      "title": "Page introuvable — {siteName}",
+      "description": "Cette page n'existe pas."
+    }
+  },
+  "nav": {
+    "home": "Accueil",
+    "products": "Plugins",
+    "about": "À propos",
+    "contact": "Contact",
+    "mainLabel": "Navigation principale",
+    "skipToContent": "Aller au contenu principal"
+  },
+  "language": {
+    "label": "Langue",
+    "switchTo": "Afficher cette page en {language}"
+  },
+  "common": {
+    "statusBadge": "Lancement à venir",
+    "learnMore": "En savoir plus",
+    "backHome": "Retour à l'accueil",
+    "optional": "facultatif",
+    "emailLabel": "Adresse e-mail"
+  },
+  "footer": {
+    "siteSection": "Le site",
+    "legalSection": "Informations légales",
+    "copyright": "© {year} {siteName}. Tous droits réservés."
+  },
+  "home": {
+    "hero": {
+      "title": "Quatre plugins SketchUp pour le travail quotidien des paysagistes",
+      "subtitle": "Métré, relevé de terrain, matériaux, sélection : des outils qui prennent en charge les gestes répétitifs d'un projet de paysage dans SketchUp.",
+      "primaryCta": "Être prévenu du lancement",
+      "secondaryCta": "Voir les quatre plugins"
+    },
+    "value": {
+      "title": "Ce que ces plugins prennent en charge",
+      "items": [
+        {
+          "title": "Du dessin au devis",
+          "text": "Le métré se fait directement sur le modèle, et les quantités partent dans un tableur qui sert de base au devis."
+        },
+        {
+          "title": "Du relevé au modèle",
+          "text": "Un fichier de coordonnées de géomètre devient un ensemble de points 3D exploitables, sans ressaisie."
+        },
+        {
+          "title": "Moins de gestes répétitifs",
+          "text": "Recherche de matériaux, rangement par dossiers, sélection par critères : autant de manipulations qui prennent moins de temps sur les gros modèles."
+        }
+      ]
+    },
+    "products": {
+      "title": "Les quatre plugins",
+      "intro": "Chacun répond à une tâche précise du quotidien d'un projet de paysage."
+    },
+    "compatibility": {
+      "intro": "Chaque plugin est développé et testé sur les versions récentes du logiciel."
+    },
+    "status": {
+      "title": "Où en est {siteName}",
+      "body": "Les quatre plugins sont écrits et fonctionnent. Ils ne sont pas encore commercialisés : un test est prévu auprès d'un petit groupe de professionnels avant toute mise à disposition. Si le sujet vous concerne, laissez votre adresse pour être prévenu.",
+      "link": "Laisser mon adresse"
+    },
+    "cta": {
+      "title": "Être prévenu du lancement",
+      "body": "Une adresse e-mail suffit. Elle ne servira qu'à vous annoncer la mise à disposition des plugins.",
+      "button": "Accéder au formulaire"
+    }
+  },
+  "products": {
+    "sectionTitle": "Les plugins",
+    "featuresTitle": "Ce que fait le plugin",
+    "stepsTitle": "Comment il s'utilise",
+    "otherProducts": "Les autres plugins",
+    "items": {
+      "quantisketch": {
+        "tagline": "Métré et quantitatif",
+        "summary": "On clique les éléments du dessin pour les ajouter à un panier — surfaces, longueurs, objets — puis on exporte le panier vers Excel pour établir le devis.",
+        "metaTitle": "{name} — le métré et le quantitatif dans SketchUp",
+        "metaDescription": "Cliquez les éléments du modèle pour constituer un panier de quantités — surfaces, longueurs, objets — et exportez-le vers Excel pour établir le devis.",
+        "features": [
+          {
+            "title": "Un panier de quantités",
+            "text": "Chaque élément cliqué dans le dessin vient s'ajouter au panier, qui se consulte au fur et à mesure du métré."
+          },
+          {
+            "title": "Surfaces, longueurs et objets",
+            "text": "Les trois natures de quantité d'un projet de paysage sont réunies dans le même panier."
+          },
+          {
+            "title": "Export vers Excel",
+            "text": "Le contenu du panier part en tableur, prêt à servir de base au devis."
+          }
+        ],
+        "steps": [
+          {
+            "title": "Ouvrir le panier",
+            "text": "Il reste accessible pendant que vous travaillez sur le modèle."
+          },
+          {
+            "title": "Cliquer les éléments à quantifier",
+            "text": "Chaque clic ajoute l'élément et sa quantité au panier."
+          },
+          {
+            "title": "Exporter vers Excel",
+            "text": "Le fichier obtenu reprend le contenu du panier."
+          }
+        ]
+      },
+      "csvPoints": {
+        "tagline": "Import de relevés",
+        "summary": "Un relevé de géomètre au format CSV devient un ensemble de points 3D dans SketchUp, avec leurs étiquettes et leurs calques.",
+        "metaTitle": "{name} — du relevé de géomètre au modèle SketchUp",
+        "metaDescription": "Transformez un fichier CSV de coordonnées en points 3D dans SketchUp, avec étiquettes et calques, sans ressaisie manuelle.",
+        "features": [
+          {
+            "title": "Lecture du fichier de coordonnées",
+            "text": "Le CSV fourni par le géomètre est lu tel quel, sans conversion préalable."
+          },
+          {
+            "title": "Des points 3D dans le modèle",
+            "text": "Chaque ligne de coordonnées devient un point placé dans le modèle."
+          },
+          {
+            "title": "Étiquettes reprises du relevé",
+            "text": "Les points portent leur étiquette d'origine, ce qui permet de les identifier dans le modèle."
+          },
+          {
+            "title": "Répartition par calques",
+            "text": "Les points sont placés sur des calques, pour les afficher ou les masquer par groupe."
+          }
+        ],
+        "steps": [
+          {
+            "title": "Récupérer le CSV du relevé",
+            "text": "Le fichier de coordonnées tel qu'il sort de l'outil du géomètre."
+          },
+          {
+            "title": "Lancer l'import",
+            "text": "Le plugin lit le fichier et crée les points dans le modèle."
+          },
+          {
+            "title": "Travailler sur le relevé",
+            "text": "Les points sont en place, avec leurs étiquettes et leurs calques."
+          }
+        ]
+      },
+      "paletteXl": {
+        "tagline": "Matériaux et composants",
+        "summary": "Un gestionnaire de matériaux et de composants plus confortable que la fenêtre d'origine : affichage agrandi, recherche par nom, rangement par dossiers.",
+        "metaTitle": "{name} — gérer les matériaux et les composants SketchUp",
+        "metaDescription": "Une fenêtre agrandie pour les matériaux et les composants SketchUp, avec recherche par nom et rangement par dossiers.",
+        "features": [
+          {
+            "title": "Une fenêtre agrandie",
+            "text": "Plus de place à l'écran pour parcourir les matériaux et les composants."
+          },
+          {
+            "title": "Recherche par nom",
+            "text": "Retrouver un élément en tapant son nom, sans faire défiler la liste."
+          },
+          {
+            "title": "Rangement par dossiers",
+            "text": "Les éléments s'organisent en dossiers, selon votre propre classement."
+          },
+          {
+            "title": "Matériaux et composants au même endroit",
+            "text": "Les deux types d'éléments se gèrent depuis la même fenêtre."
+          }
+        ],
+        "steps": [
+          {
+            "title": "Ouvrir la fenêtre",
+            "text": "Elle remplace l'affichage d'origine pendant le travail."
+          },
+          {
+            "title": "Chercher ou parcourir",
+            "text": "Par nom, ou en naviguant dans vos dossiers."
+          },
+          {
+            "title": "Appliquer au modèle",
+            "text": "L'élément choisi s'applique comme d'habitude."
+          }
+        ]
+      },
+      "multiSelect": {
+        "tagline": "Sélection par critères",
+        "summary": "Sélectionner d'un coup plusieurs entités du modèle selon des critères, plutôt qu'une par une — utile quand le projet devient volumineux.",
+        "metaTitle": "{name} — sélectionner plusieurs entités SketchUp selon des critères",
+        "metaDescription": "Sélectionnez rapidement plusieurs entités d'un modèle SketchUp selon des critères, plutôt qu'une par une, sur les grands projets.",
+        "features": [
+          {
+            "title": "Sélection selon des critères",
+            "text": "Les entités concernées sont retenues d'après les critères choisis, sans clic sur chacune."
+          },
+          {
+            "title": "Plusieurs entités d'un coup",
+            "text": "La sélection obtenue se manipule ensuite comme n'importe quelle sélection SketchUp."
+          },
+          {
+            "title": "Pensé pour les gros modèles",
+            "text": "L'intérêt grandit avec la taille du projet, quand la sélection manuelle devient coûteuse."
+          }
+        ],
+        "steps": [
+          {
+            "title": "Choisir les critères",
+            "text": "Ils déterminent les entités qui seront retenues."
+          },
+          {
+            "title": "Lancer la sélection",
+            "text": "Les entités correspondantes sont sélectionnées ensemble."
+          },
+          {
+            "title": "Travailler sur l'ensemble",
+            "text": "La suite se passe comme avec une sélection faite à la main."
+          }
+        ]
+      }
+    }
+  },
+  "compatibility": {
+    "title": "Compatibilité",
+    "keyFigureLabel": "Versions testées",
+    "supported": "Testé sur {app} {versions} sous {os}.",
+    "macNote": "Le fonctionnement sur Mac n'a pas été testé à ce jour."
+  },
+  "about": {
+    "title": "À propos",
+    "intro": "{siteName} est le travail d'un développeur indépendant, qui écrit et maintient seul les quatre plugins.",
+    "sections": [
+      {
+        "title": "L'éditeur",
+        "body": "Il n'y a pas d'équipe derrière ces plugins : conception, développement en Ruby et suivi des versions de SketchUp sont assurés par une seule personne. Les échanges se font donc en direct, sans intermédiaire."
+      },
+      {
+        "title": "L'approche",
+        "body": "Chaque plugin part d'une tâche précise et répétitive du travail dans SketchUp, et s'arrête là. Aucune fonction n'est ajoutée pour faire nombre : un outil qui fait bien une chose est plus simple à apprendre et plus simple à corriger."
+      },
+      {
+        "title": "L'état du projet",
+        "body": "Les quatre plugins fonctionnent et sont testés sur {app} {versions} sous {os}. Le fonctionnement sur Mac n'a pas été testé à ce jour. Rien n'est encore commercialisé : un test est prévu auprès d'un petit groupe de professionnels, dont les retours orienteront la suite."
+      }
+    ]
+  },
+  "contact": {
+    "title": "Être prévenu du lancement",
+    "intro": "Laissez votre adresse e-mail pour être prévenu lorsque les plugins seront disponibles. Vous pouvez ajouter un message pour décrire votre usage ou poser une question.",
+    "fallback": {
+      "label": "Vous pouvez aussi écrire directement à :",
+      "note": "Le formulaire ci-dessus aboutit à cette même adresse."
+    },
+    "form": {
+      "legend": "Vos coordonnées",
+      "name": "Nom",
+      "email": "Adresse e-mail",
+      "message": "Message",
+      "emailHint": "Utilisée uniquement pour vous annoncer la mise à disposition des plugins.",
+      "messageHint": "2 000 caractères au maximum.",
+      "consent": "J'accepte que mon adresse e-mail soit conservée pour être prévenu du lancement.",
+      "privacyLink": "Lire la politique de confidentialité",
+      "submit": "Envoyer",
+      "sending": "Envoi en cours…"
+    },
+    "errors": {
+      "method": "Méthode non autorisée.",
+      "payload": "Le formulaire n'a pas pu être lu.",
+      "email": "L'adresse e-mail saisie n'est pas valide.",
+      "consent": "Votre accord est nécessaire pour conserver votre adresse.",
+      "tooLong": "Un des champs dépasse la longueur autorisée.",
+      "rateLimit": "Trop d'envois depuis cette connexion. Réessayez dans une heure.",
+      "server": "L'envoi a échoué. Réessayez plus tard, ou écrivez directement à l'adresse indiquée."
+    },
+    "status": {
+      "success": "Votre adresse est enregistrée. Vous serez prévenu du lancement.",
+      "label": "État de l'envoi"
+    }
+  },
+  "formStatus": {
+    "success": {
+      "title": "Message bien reçu",
+      "body": "Votre adresse est enregistrée. Vous serez prévenu dès que les plugins seront disponibles.",
+      "back": "Retour à l'accueil"
+    },
+    "error": {
+      "title": "L'envoi n'a pas abouti",
+      "body": "Votre message n'a pas pu être transmis. Vous pouvez réessayer, ou écrire directement à l'adresse ci-dessous.",
+      "back": "Revenir au formulaire"
+    }
+  },
+  "legal": {
+    "title": "Mentions légales",
+    "disclaimer": "Cette page est incomplète : elle doit être renseignée puis relue par un professionnel du droit avant la mise en ligne du site.",
+    "sections": [
+      {
+        "title": "Éditeur du site",
+        "body": "Le site {siteName} est édité par [[À COMPLÉTER : raison sociale]], [[À COMPLÉTER : forme juridique]], dont le siège est situé [[À COMPLÉTER : adresse postale]], immatriculée sous le numéro [[À COMPLÉTER : SIRET]]. Numéro de TVA intracommunautaire : [[À COMPLÉTER : numéro de TVA]]."
+      },
+      {
+        "title": "Directeur de la publication",
+        "body": "[[À COMPLÉTER : nom du directeur de la publication]]."
+      },
+      {
+        "title": "Hébergement",
+        "body": "Le site est hébergé par [[À COMPLÉTER : hébergeur, raison sociale et adresse]]."
+      },
+      {
+        "title": "Contact",
+        "body": "Toute question relative au site peut être adressée à {email}."
+      },
+      {
+        "title": "Propriété intellectuelle",
+        "body": "Les textes, la présentation et les éléments graphiques de ce site sont la propriété de l'éditeur. Toute reproduction, même partielle, est soumise à son autorisation préalable. Les marques et noms de logiciels cités appartiennent à leurs titulaires respectifs."
+      },
+      {
+        "title": "Responsabilité",
+        "body": "Les informations publiées sur ce site sont fournies à titre indicatif et peuvent évoluer. L'éditeur ne peut être tenu responsable de l'usage qui en est fait."
+      }
+    ]
+  },
+  "privacy": {
+    "title": "Politique de confidentialité",
+    "disclaimer": "Cette page est incomplète : elle doit être renseignée puis relue par un professionnel du droit avant la mise en ligne du site.",
+    "sections": [
+      {
+        "title": "Responsable du traitement",
+        "body": "Le responsable du traitement est [[À COMPLÉTER : raison sociale]], [[À COMPLÉTER : adresse postale]], joignable à {email}."
+      },
+      {
+        "title": "Données collectées",
+        "body": "Le formulaire de contact recueille votre adresse e-mail, et, si vous les renseignez, votre nom et votre message. Aucune autre donnée n'est demandée. Aucun compte n'est créé et aucun paiement n'est traité sur ce site."
+      },
+      {
+        "title": "Finalité et base légale",
+        "body": "Ces données servent uniquement à répondre à votre message et à vous prévenir de la mise à disposition des plugins. Le traitement repose sur votre consentement, recueilli par la case à cocher du formulaire. Vous pouvez le retirer à tout moment en écrivant à {email}."
+      },
+      {
+        "title": "Destinataires et sous-traitants",
+        "body": "Vos données sont transmises aux prestataires suivants : [[À COMPLÉTER : sous-traitant assurant l'hébergement du site, raison sociale, pays, garanties de transfert]] et [[À COMPLÉTER : sous-traitant assurant l'envoi des e-mails, raison sociale, pays, garanties de transfert]]. Elles ne sont ni vendues ni cédées à des tiers."
+      },
+      {
+        "title": "Durée de conservation",
+        "body": "Les messages et adresses collectés sont conservés [[À COMPLÉTER : durée de conservation, par exemple trois ans à compter du dernier contact]], puis supprimés."
+      },
+      {
+        "title": "Vos droits",
+        "body": "Vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation et d'opposition, ainsi que d'un droit à la portabilité de vos données. Pour les exercer : [[À COMPLÉTER : modalités d'exercice des droits, adresse dédiée et délai de réponse]]. Vous pouvez également introduire une réclamation auprès de la CNIL."
+      },
+      {
+        "title": "Protection contre les abus",
+        "body": "Pour limiter les envois automatisés, le nombre de messages émis depuis une même connexion est plafonné. Cette mesure ne conserve pas votre adresse IP : seule une empreinte non réversible est stockée pendant une heure, puis effacée."
+      },
+      {
+        "title": "Cookies et mesure d'audience",
+        "body": "Ce site ne dépose aucun cookie et n'utilise aucun outil de mesure d'audience."
+      }
+    ]
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "body": "La page demandée n'existe pas, ou elle a été déplacée."
+  }
+}

@@ -1,0 +1,41 @@
+---
+import { getDictionary, format, locales, localeNames, type Locale } from '../i18n/ui';
+import { pathFor, type RouteId } from '../i18n/routes';
+
+interface Props {
+  locale: Locale;
+  /** Absent sur la page 404 : le selecteur renvoie alors vers l'accueil. */
+  pageId?: RouteId;
+}
+
+const { locale, pageId } = Astro.props;
+const t = getDictionary(locale);
+---
+
+<nav aria-label={t.language.label}>
+  <ul class="flex items-center gap-1 rounded-control border border-line bg-surface p-1">
+    {
+      locales.map((code) => {
+        const current = code === locale;
+        return (
+          <li>
+            <a
+              href={pathFor(pageId ?? 'home', code)}
+              hreflang={code}
+              lang={code}
+              aria-current={current ? 'true' : undefined}
+              aria-label={current ? undefined : format(t.language.switchTo, {
+                language: localeNames[code],
+              })}
+              class={`block rounded-chip px-2.5 py-1 text-xs font-medium uppercase transition-colors ${
+                current ? 'bg-subtle text-ink' : 'text-muted hover:text-ink'
+              }`}
+            >
+              {code}
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</nav>

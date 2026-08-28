@@ -1,0 +1,38 @@
+---
+import Card from '../Card.astro';
+import Button from '../Button.astro';
+import { getDictionary, type Locale } from '../../i18n/ui';
+import { pathFor } from '../../i18n/routes';
+import { CONTACT_EMAIL } from '../../site.config';
+
+interface Props {
+  locale: Locale;
+  state: 'success' | 'error';
+}
+
+const { locale, state } = Astro.props;
+const t = getDictionary(locale);
+const content = t.formStatus[state];
+const backHref = state === 'success' ? pathFor('home', locale) : pathFor('contact', locale);
+---
+
+<section class="mx-auto max-w-2xl px-4 py-24 sm:px-6">
+  <Card>
+    <h1 class="text-3xl font-bold tracking-tight text-ink">{content.title}</h1>
+    <p class="mt-4 text-base leading-relaxed text-muted">{content.body}</p>
+
+    {
+      state === 'error' && (
+        <p class="mt-6 break-words text-base">
+          <a href={`mailto:${CONTACT_EMAIL}`} class="text-ink underline hover:no-underline">
+            {CONTACT_EMAIL}
+          </a>
+        </p>
+      )
+    }
+
+    <p class="mt-8">
+      <Button href={backHref}>{content.back}</Button>
+    </p>
+  </Card>
+</section>

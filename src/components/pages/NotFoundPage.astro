@@ -1,0 +1,23 @@
+---
+import Button from '../Button.astro';
+import Card from '../Card.astro';
+import { getDictionary, type Locale } from '../../i18n/ui';
+import { pathFor } from '../../i18n/routes';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+---
+
+<section class="mx-auto max-w-2xl px-4 py-24 sm:px-6">
+  <Card>
+    <h1 class="text-3xl font-bold tracking-tight text-ink">{t.notFound.title}</h1>
+    <p class="mt-4 text-base leading-relaxed text-muted">{t.notFound.body}</p>
+    <p class="mt-8">
+      <Button href={pathFor('home', locale)}>{t.common.backHome}</Button>
+    </p>
+  </Card>
+</section>

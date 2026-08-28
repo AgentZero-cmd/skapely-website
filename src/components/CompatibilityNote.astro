@@ -1,0 +1,37 @@
+---
+import Card from './Card.astro';
+import { compatibility } from '../data/compatibility';
+import { getDictionary, format, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+---
+
+<Card class="flex flex-col gap-8 sm:flex-row sm:items-center">
+  <div class="sm:w-48">
+    <p class="text-xs font-semibold uppercase tracking-wide text-muted">
+      {t.compatibility.keyFigureLabel}
+    </p>
+    <!-- Chiffre cle : l'une des rares zones vertes autorisees sur la page. -->
+    <p class="mt-2 text-3xl font-bold tracking-tight text-accent">
+      {compatibility.versionRange}
+    </p>
+  </div>
+
+  <div class="flex-1 space-y-2">
+    <p class="text-base text-ink">
+      {
+        format(t.compatibility.supported, {
+          app: compatibility.app,
+          versions: compatibility.versionList,
+          os: compatibility.os,
+        })
+      }
+    </p>
+    <p class="text-sm leading-relaxed text-muted">{t.compatibility.macNote}</p>
+  </div>
+</Card>

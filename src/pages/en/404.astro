@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NotFoundPage from '../../components/pages/NotFoundPage.astro';
+import { getDictionary, format } from '../../i18n/ui';
+import { SITE_NAME } from '../../site.config';
+
+const locale = 'en' as const;
+const t = getDictionary(locale);
+---
+
+<BaseLayout
+  locale={locale}
+  title={format(t.meta.notFound.title, { siteName: SITE_NAME })}
+  description={format(t.meta.notFound.description, { siteName: SITE_NAME })}
+>
+  <NotFoundPage locale={locale} />
+</BaseLayout>
