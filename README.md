@@ -4,7 +4,7 @@ Site vitrine bilingue (français par défaut, anglais sous `/en`) présentant le
 plugins SketchUp de Skapely. Site statique, sans base de données, sans authentification
 et sans paiement : son rôle est la présentation et la collecte de contacts.
 
-- **Astro 5** en sortie statique (`output: 'static'`)
+- **Astro 7** en sortie statique (`output: 'static'`)
 - **Tailwind CSS 4** en configuration CSS (`@tailwindcss/vite` + `@theme`)
 - **TypeScript strict**
 - **Cloudflare Pages** pour l'hébergement, plus une Pages Function pour le formulaire
@@ -32,80 +32,80 @@ d'où le script dédié.
 
 ## Vulnérabilités npm et version d'Astro
 
-`npm install` signale des vulnérabilités. Voici l'état relevé le **24 août 2026**, pour
-ne pas avoir à refaire l'analyse à chaque installation. **Ne pas lancer
-`npm audit fix --force`** : la seule correction proposée est une montée en Astro 7, qui
-est une décision à prendre (voir plus bas), pas un correctif automatique.
+État au **28 août 2026** : `npm audit` remonte **0 vulnérabilité**. Cette section garde
+la trace de la façon dont on y est arrivé, pour ne pas refaire l'analyse.
 
-### Ce qui est signalé
+### Historique
 
-`npm audit` remonte trois paquets et dix avis au total :
+Le site a été livré en **Astro 5.18.2**, sur laquelle `npm audit` remontait **trois
+paquets et dix avis** : `astro` (high, huit avis), plus `esbuild` (low) et `sharp` (high)
+tirés par lui. Le site publié n'était pas atteint — `output: 'static'`, aucun adaptateur,
+donc aucun runtime en production, et aucune des fonctionnalités visées n'était utilisée —
+mais **5.18.2 est la dernière 5.x publiée** et aucun correctif n'a été rétroporté dans
+cette branche : les correctifs atterrissent en 6.1.6, 6.1.10, 6.3.3, 6.4.6, 7.0.4, 7.0.6
+et après 7.0.9.
 
-| Paquet | Sévérité npm | Version installée | Origine |
-| --- | --- | --- | --- |
-| `astro` | high | 5.18.2 | dépendance directe |
-| `esbuild` | low | 0.27.7 | tiré par `astro` |
-| `sharp` | high | 0.34.5 | tiré par `astro` |
+Le dépôt est donc passé en **Astro 7.2.9 le 28 août 2026**, un saut de deux majeures
+(Astro 6.0.0 le 10 mars 2026, Astro 7.0.0 le 22 juin 2026). À noter, si la question se
+repose : **la 7.0.10 n'existe pas**, la 7.0.x s'arrête à 7.0.9 et la première version
+hors de tous les avis est 7.1.0.
 
-Les huit avis portés par `astro` lui-même, avec la version qui les corrige :
+Les trois paquets sortent des plages vulnérables sans intervention : `esbuild` passe en
+0.28.2 (l'avis vise `<0.28.1`) et `sharp` en 0.35.4 (l'avis vise `<0.35.0`).
 
-| Avis | Sévérité | Corrigé en |
-| --- | --- | --- |
-| XSS `define:vars`, balise `</script>` mal assainie | moderate | 6.1.6 |
-| Rejeu des paramètres chiffrés des server islands | low | 6.1.10 |
-| XSS par noms d'attributs en spread | moderate | 6.4.6 |
-| XSS spread dans `renderHTMLElement` | moderate | 7.0.6 |
-| XSS sur les directives `transition:*` d'îlots hydratés | low | 7.0.4 |
-| XSS réfléchi, propriétés d'animation de View Transitions | moderate | après 7.0.9 |
-| SSRF par en-tête Host sur la page d'erreur prérendue | high | 6.4.6 |
-| XSS réfléchi par nom de slot | high | 6.3.3 |
+### Ce que la migration a demandé
 
-À noter : `wrangler` tire ses propres copies d'`esbuild` (0.28.1) et de `sharp` (0.35.2),
-toutes deux **hors des plages vulnérables**. Seules les copies tirées par `astro` sont
-concernées.
+Deux lignes de configuration, aucune modification de code applicatif :
 
-### Pourquoi le site publié n'est pas atteint
+- **`compressHTML: true`** dans `astro.config.ts`. Astro 7 fait passer le défaut de `true`
+  à `'jsx'`, qui supprime l'espace séparant deux éléments rendus en ligne — `<span>`,
+  `<em>` — comme le fait React. Sans cette ligne, `<span>a</span> <em>b</em>` rendrait
+  `ab` sur les 24 pages.
+- **Node 22.12.0 minimum**, exigé par Astro 7 : voir `.nvmrc`, le champ `engines` de
+  `package.json` et l'étape 3 de la section Déploiement.
 
-Chaque point ci-dessous a été vérifié sur ce dépôt, pas supposé :
+La configuration i18n, `trailingSlash: 'never'` et `build.format: 'file'` ont été
+revérifiées et **n'ont demandé aucun changement**. Attention si la config i18n est
+retouchée : depuis Astro 6, `i18n.routing.redirectToDefaultLocale` ne peut valoir `true`
+que si `prefixDefaultLocale` vaut `true`. Notre couple `false`/`false` reste valide.
 
-- **Aucun runtime en production.** `output: 'static'` et aucun adaptateur : `dist/` ne
-  contient aucun fichier JavaScript serveur. Cloudflare Pages sert des fichiers HTML déjà
-  rendus, Astro ne s'exécute jamais côté serveur. Or les avis « XSS réfléchi » et « SSRF
-  par en-tête Host » supposent un rendu au moment de la requête.
-- **Aucune des fonctionnalités visées n'est utilisée** : zéro `define:vars`, zéro
-  `server:defer`, zéro directive `transition:*` (les occurrences de `transition:` dans le
-  CSS sont des propriétés d'animation, sans rapport), ni `ClientRouter` ni
-  `ViewTransitions`, aucun slot nommé, aucun spread d'attributs `{...}`.
-- **Le rendu au build ne consomme que nos propres fichiers** (`src/i18n/*.json`,
-  `src/data/`), jamais une entrée extérieure.
-- **`sharp` n'est jamais appelé** : pas d'`astro:assets`, pas de composant `<Image>`,
-  aucune image dans le dépôt. Les CVE libvips supposent le traitement d'une image.
-- **L'avis `esbuild` ne vise que le serveur de développement propre à esbuild**
-  (`--servedir`), et sur Windows uniquement (« This issue affects Windows environments
-  only »). `astro dev` sert les fichiers via Vite ; esbuild n'intervient que pour la
-  transformation et le bundling. À garder en tête si le poste de développement est sous
-  Windows, mais le chemin vulnérable n'est pas emprunté.
+### Effets de bord assumés
 
-Le risque résiduel se limite donc à la machine de développement, pas au site déployé.
+- **Le bundle CSS a changé de nom** : `_astro/a-propos.*.css` est devenu
+  `_astro/Card.*.css`, Rollup 8 nommant le chunk d'après un autre module d'entrée. C'est
+  la **seule** ligne de l'inventaire de `dist/` qui a bougé : 35 fichiers avant, 35 après,
+  mêmes 24 pages, mêmes sept `woff2` au hachage identique, `robots.txt` et `sitemap.xml`
+  identiques à l'octet.
+- **Le script embarqué du formulaire est minifié par un autre minifieur** (Vite 8) : `const`
+  et guillemets deviennent `var` et accents graves. Code sémantiquement identique.
+- **Le plancher navigateur du CSS est passé de Safari 14 à Safari 16.4** (Chrome 104+,
+  Firefox 102+). Vite 8 émet la syntaxe d'intervalle des media queries,
+  `@media (width>=40rem)` au lieu de `@media (min-width:40rem)`, et laisse tomber des
+  préfixes `-webkit-`. Le mode de défaillance est bénin : sur un mobile plus ancien, des
+  points de rupture qui ne s'appliquent pas laissent la page en une colonne, ce qui est
+  la mise en page mobile prévue. **Pour revenir en arrière**, sans quoi il faudrait le
+  redécouvrir :
 
-### Version d'Astro : décision à prendre
+  ```ts
+  // astro.config.ts
+  vite: {
+    plugins: [tailwindcss()],
+    build: { cssTarget: ['chrome107', 'edge107', 'firefox104', 'safari16'] },
+  },
+  ```
 
-État du registre npm au 24 août 2026 :
+  Cette ligne restaure `@media (min-width:40rem)` et les préfixes. Elle n'est
+  volontairement pas posée : un site vitrine livré en 2026 n'a pas à porter Safari 14.
 
-- dernière version publiée : **7.2.6**, le 24 août 2026 ;
-- **Astro 6.0.0** : 10 mars 2026 — **Astro 7.0.0** : 22 juin 2026 ;
-- version installée : **5.18.2**, publiée le 26 mai 2026, qui est la **dernière 5.x
-  existante**.
+### Fonctionnalités d'Astro 6 et 7 repérées et non implémentées
 
-Aucun des correctifs listés plus haut n'a été rétroporté dans la branche 5 : ils
-atterrissent en 6.1.6, 6.3.3, 6.4.6, 7.0.4 et 7.0.6.
+Signalées pour plus tard, délibérément écartées de la migration :
 
-**Le site publié n'est pas atteint, mais Astro 5.18.2 est la dernière 5.x et ne reçoit
-plus de correctifs de sécurité ; une migration vers la majeure courante est à décider.**
-
-Cette décision se prend séparément et n'est pas tranchée ici. Si elle est prise, elle
-implique de relire les notes de migration 5 → 6 → 7 et de revérifier la configuration
-i18n, `trailingSlash` et `build.format`, sur lesquelles repose la forme des URL.
+- **`security.csp`** — Content Security Policy native, stabilisée en Astro 6.
+- **`astro:fonts`** — module de polices stabilisé en Astro 6, qui remplacerait
+  `@fontsource-variable/inter`.
+- **`cache` et `routeRules`** — stabilisés en Astro 7, sans objet en sortie statique.
+- **Nouveau système de `logger`** — stabilisé en Astro 7.
 
 ## Structure
 
