@@ -262,16 +262,21 @@ npm run pages:dev             # wrangler pages dev dist --kv RATE_LIMIT_KV
 1. **Créer le projet** et le relier au dépôt Git.
 2. **Build** : commande `npm run build`, dossier de sortie `dist`. Le dossier `functions/`
    est détecté automatiquement.
-3. **Variables d'environnement** : renseigner les trois variables ci-dessus dans
+3. **Version de Node** : Astro 7 exige **Node 22.12.0 ou plus**. Le dépôt porte un
+   `.nvmrc` à `22.12.0` et un champ `engines` dans `package.json`. En ceinture et
+   bretelles, poser aussi `NODE_VERSION` à `22.12.0` dans
+   *Settings > Environment variables*, au cas où Pages n'honorerait pas le `.nvmrc` :
+   sans cela le build échoue en production alors qu'il passe en local.
+4. **Variables d'environnement** : renseigner les trois variables ci-dessus dans
    *Settings > Environment variables*, en les marquant comme secrètes.
-4. **Namespace KV** : créer un namespace, puis le lier au projet sous le nom
+5. **Namespace KV** : créer un namespace, puis le lier au projet sous le nom
    `RATE_LIMIT_KV` dans *Settings > Functions > KV namespace bindings*. Sans ce binding,
    le formulaire continue de fonctionner mais la limitation par IP est désactivée et un
    avertissement est journalisé.
-5. **Règle de rate limiting** : poser en complément une règle sur `/api/subscribe` dans
+6. **Règle de rate limiting** : poser en complément une règle sur `/api/subscribe` dans
    *Security > WAF > Rate limiting rules*. Le compteur KV est une première barrière, pas
    une protection de bordure.
-6. **Domaine** : ajouter le domaine personnalisé dans *Custom domains*.
+7. **Domaine** : ajouter le domaine personnalisé dans *Custom domains*.
 
 ### Changer de domaine ou de marque
 
