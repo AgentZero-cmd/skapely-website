@@ -13,6 +13,12 @@ export default defineConfig({
   trailingSlash: 'never',
   build: { format: 'file' },
 
+  // Astro 5 comprimait le HTML en respectant les regles d'espacement HTML.
+  // Astro 7 fait passer le defaut a 'jsx', qui supprime l'espace entre deux
+  // elements inline, comme React : `<span>a</span> <em>b</em>` rendrait `ab`.
+  // On garde le comportement d'origine.
+  compressHTML: true,
+
   i18n: {
     locales: ['fr', 'en'],
     defaultLocale: 'fr',
