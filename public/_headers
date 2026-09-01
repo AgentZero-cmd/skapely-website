@@ -1,0 +1,22 @@
+# En-tetes HTTP poses par Cloudflare Pages. Ce fichier est copie tel quel dans
+# dist/ et n'est pas servi comme une page.
+#
+# TEMPORAIRE — lie a SITE_PRIVATE dans src/site.config.ts.
+#
+# Le site est en ligne mais pas encore publie. Trois mecanismes le protegent :
+#   1. robots.txt  -> Disallow: /            (empeche le crawl)
+#   2. meta robots -> noindex, nofollow      (lue seulement si la page est crawlee)
+#   3. ce fichier  -> X-Robots-Tag           (pose sur CHAQUE reponse HTTP, meme
+#                                             sur une URL jamais crawlee)
+# Le troisieme est le seul qui ne depende pas du crawl : c'est lui qui couvre
+# une URL partagee par un lien direct.
+#
+# ATTENTION — ce fichier est statique : il ne peut PAS lire SITE_PRIVATE.
+# Passer le site en public demande donc DEUX gestes, pas un :
+#   1. SITE_PRIVATE = false dans src/site.config.ts ;
+#   2. supprimer ce fichier (ou commenter la ligne X-Robots-Tag ci-dessous).
+# Oublier le second laisse le site desindexe alors que tout le code dit le
+# contraire. Voir la section « Passer le site en public » du README.
+
+/*
+  X-Robots-Tag: noindex, nofollow

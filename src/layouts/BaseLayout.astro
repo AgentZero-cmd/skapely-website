@@ -4,7 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { getDictionary, locales, openGraphLocales, type Locale } from '../i18n/ui';
 import { isUnlisted, urlFor, type RouteId } from '../i18n/routes';
-import { SITE_NAME, SITE_URL } from '../site.config';
+import { SITE_NAME, SITE_PRIVATE, SITE_URL } from '../site.config';
 
 interface Props {
   locale: Locale;
@@ -21,6 +21,12 @@ const t = getDictionary(locale);
 // declinees en liens alternatifs : elles n'ont pas d'equivalent a referencer.
 const published = pageId !== undefined && !isUnlisted(pageId);
 const canonical = published ? urlFor(pageId, locale) : undefined;
+
+// Une seule balise `robots` par page, jamais deux. Tant que SITE_PRIVATE vaut
+// true, le refus s'applique a TOUTES les pages et l'emporte sur le cas des
+// pages non publiees. Quand la constante repassera a false, la ligne ci-dessous
+// redonnera exactement le comportement d'origine.
+const robots = SITE_PRIVATE ? 'noindex, nofollow' : published ? undefined : 'noindex, follow';
 ---
 
 <!doctype html>
@@ -40,7 +46,7 @@ const canonical = published ? urlFor(pageId, locale) : undefined;
         ))
     }
     {published && <link rel="alternate" hreflang="x-default" href={urlFor(pageId, 'fr')} />}
-    {!published && <meta name="robots" content="noindex, follow" />}
+    {robots && <meta name="robots" content={robots} />}
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE_NAME} />

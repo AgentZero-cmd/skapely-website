@@ -118,6 +118,7 @@ src/
   components/           Composants partagés ; components/pages/ contient les corps de page
   pages/                Routes : français à la racine, anglais sous en/
   styles/global.css     Jetons de thème Tailwind et styles de base
+public/                 Servi tel quel : favicon.svg, _headers
 functions/api/          Pages Function du formulaire de contact
 ```
 
@@ -277,6 +278,40 @@ npm run pages:dev             # wrangler pages dev dist --kv RATE_LIMIT_KV
    *Security > WAF > Rate limiting rules*. Le compteur KV est une première barrière, pas
    une protection de bordure.
 7. **Domaine** : ajouter le domaine personnalisé dans *Custom domains*.
+
+### Le site est en refus d'indexation
+
+Le site est **en ligne mais pas encore publié**. Tant que c'est le cas, il refuse d'être
+indexé, par **trois mécanismes** qui ne se recouvrent pas :
+
+| Mécanisme | Fichier | Ce qu'il couvre |
+| --- | --- | --- |
+| `Disallow: /` | `src/pages/robots.txt.ts` | Empêche le parcours par les robots qui respectent `robots.txt` |
+| `noindex, nofollow` | `src/layouts/BaseLayout.astro` | Lu **seulement si la page est parcourue** — donc pas quand `robots.txt` l'interdit |
+| `X-Robots-Tag` | `public/_headers` | Posé sur **chaque réponse HTTP**, même pour une URL jamais parcourue |
+
+Les deux premiers dépendent du parcours : `Disallow: /` empêche l'exploration mais
+**n'empêche pas** une URL découverte autrement — un lien partagé, par exemple — d'être
+listée. Le troisième est le seul qui ne dépende de rien : c'est lui qui ferme ce cas.
+
+Le sitemap, lui, **continue d'être généré normalement** : `src/pages/sitemap.xml.ts`
+n'est pas concerné. Seule la ligne `Sitemap:` de `robots.txt` est retirée tant que le
+site est privé, pour ne pas livrer la liste des URLs à des robots à qui on vient de dire
+de ne pas venir.
+
+### Passer le site en public
+
+**Deux gestes, pas un** :
+
+1. **`SITE_PRIVATE = false`** dans `src/site.config.ts`. Cela restitue d'un coup
+   `Allow: /` et la ligne `Sitemap:` dans `robots.txt`, et retire la balise `robots` des
+   pages publiées (les pages `unlisted` et la 404 retrouvent leur `noindex, follow`).
+2. **Supprimer `public/_headers`** — ou y commenter la ligne `X-Robots-Tag`.
+
+Le second geste est facile à oublier, et c'est **la seule entorse au principe du réglage
+unique** de `src/site.config.ts` : `public/_headers` est un fichier statique copié tel
+quel dans `dist/`, il ne peut pas lire une constante TypeScript. Sans ce second geste, le
+site reste désindexé alors que tout le code dit le contraire.
 
 ### Changer de domaine ou de marque
 
